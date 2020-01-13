@@ -1,24 +1,28 @@
 """
+MAIN APPLICATION IN BART_MAP PROJECT.
+ALLOCATES TWO CPU PROCESSES: FOR FETCHING
+INFORMATION ON LEAVING TRAINS AND PLOTTING
+THEIR STATION COORD ON A BART MAP.
 """
-# todo complete file doc
-
 import multiprocessing as mp
 import os
 import sys
 import time
 import bart_api
-import timeout as timeout
+from timeout import TimeoutError
 from bart_plot import *
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
 def handle_exceptions():
     time.sleep(1)
+
 
 def listener(q):
     while True:
         try:
             parsed_trains = q.get(False)
-        except:
+        except Exception:
             continue
         plot_map(parsed_trains)
 
@@ -28,12 +32,13 @@ def cont_fetch_api(q):
     while True:
         try:
             current_departures = bart.fetch_multi_first_departures()
-        except (ConnectionError, KeyError, timeout.TimeoutError):
+        except (ConnectionError, KeyError, TimeoutError):
             handle_exceptions()
             continue
         leaving_trains = bart.fetch_leaving_train(current_departures)
         parsed_trains = parse_for_plot(leaving_trains)
         q.put(parsed_trains)
+
 
 def main():
     os.chdir(BASE_DIR)

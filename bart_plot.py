@@ -1,24 +1,29 @@
-from data_storage import *
-import matplotlib.pyplot as plt
+"""
+PLOTTING APPLICATION FOR BART_MAP PROJECT.
+OBTAINS LEAVING BART TRAIN INFORMATION FROM
+BART_API.PY AND PLOT THEIR COORDINATES ON A
+BART MAP.
+"""
 import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+from data_storage import *
 img = mpimg.imread('./map_weekday.png')
+
 
 def plot_map(curated_train_list):
     print('plot_map hit')
-    fig = plt.figure(figsize = (10, 10))
+    fig = plt.figure(figsize=(10, 10))
     zoom = 1.0
     w, h = fig.get_size_inches()
     fig.set_size_inches(w * zoom, h * zoom)
     plt.imshow(img)
 
     for i in curated_train_list:
-        plt.plot(float(i[0][0]), float(i[0][1]), 'ko') # or i[1]
-        # temp_points.remove()
+        plt.plot(float(i[0][0]), float(i[0][1]), 'ko')  # or i[1]
 
     plt.show(block=False)
     plt.pause(0.1)
     plt.close()
-    print('not locked')
 
 
 def parse_for_plot(train_list):
@@ -49,4 +54,3 @@ def find_coord(stn, color):
         return 0
 
     return station_coord
-
