@@ -1,4 +1,8 @@
-"""DICTIONARY STORAGE OF STATION INFORMATION WITH APPROPRIATE COORD"""
+"""Storage file for dictionaries (Map coordinates, BART station information, etc.)"""
+
+
+"""Dictonaries for train line + stations. These coordinates must be paired
+with map_weekday.png"""
 
 RedDict = {'RED_12TH': ('411.63', '332.72'),
  'RED_16TH': ('181.36', '461.36'),

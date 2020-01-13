@@ -42,7 +42,11 @@ def find_coord(stn, color):
     except NameError:
         return 0
     coord_key = "{}_{}".format(color.upper(), stn)
-    station_coord = coord_dict[coord_key]
+    try:
+        station_coord = coord_dict[coord_key]
+    except KeyError as error:  # Cases where there are anomaly line_station pair
+        print(error)
+        return 0
 
     return station_coord
 
