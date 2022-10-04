@@ -1,4 +1,4 @@
-# BART_map
+# bart-map
 An application that will show you, in real-time, BART trains that are leaving (via BART map).
 
 This project allows the user to view departing trains on a BART map, with trains denoted by black, circular points. Leaving trains may linger on the station for nearly a minute before it disappears.
